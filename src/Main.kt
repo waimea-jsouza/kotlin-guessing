@@ -3,9 +3,14 @@
  */
 
 fun main() {
-    println("====================".red())
+    println("====================")
     println("Kotlin Coded Guessing")
     println("====================")
+    val playerName = getString("Enter your name: ")
+    println("Nice to meet you $playerName")
+
+    val favColour = getString("Enter your colour: ")
+    println("$favColour is a great colour.")
 
     val numbToGuess = (1..100).random()
     println("I am thinking of a number from 1 to 100!!")
@@ -16,18 +21,16 @@ fun main() {
     var guessCounter = 1
     while (true) {
         // ask the user for input
-        val userGuess = readln().toIntOrNull()
+        val userGuess = getInt("Guess the number: ")
         // Check if the user's input is correct
-        if (userGuess == null) {
-           println("That's not a number!!")
 
-        } else {
+
             //Break out of the loop if correct
-            if (userGuess == numbToGuess) {
-                println("You guessed correctly!")
-                if (guessCounter == 1) {
-                    println("Awesome you got it on your first try!!")
-                    break
+        if (userGuess == numbToGuess) {
+            println("You guessed correctly!")
+            if (guessCounter == 1) {
+                println("Awesome you got it on your first try!!")
+                break
                 } else if (guessCounter > 10) {
                     println("You took $guessCounter tries get better!!")
                     break
@@ -43,4 +46,33 @@ fun main() {
         }
     }
 
+
+
+/**
+ *  Function to get String from user
+ *
+ *  parameters:
+ *  - prompt is text to show the user
+ *  returns:
+ *  String that the uer types
+ */
+
+fun getString(prompt: String): String {
+    var userInput:  String
+    while (true){
+        print(prompt)
+        userInput = readln()
+        if (userInput.isNotBlank()) break
+    }
+    return userInput
+}
+
+fun getInt(prompt: String): Int{
+    var intValue: Int?
+    while (true) {
+        val userInput = getString(prompt)
+        intValue = userInput.toIntOrNull()
+        if (intValue != null) break
+    }
+    return intValue!!
 }
